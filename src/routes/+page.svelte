@@ -1,2 +1,7 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<script lang="ts">
+    import Section from "./section/Section.svelte";
+
+    import SectionData from "./section/SectionData.json";
+</script>
+
+<Section {...SectionData}></Section>

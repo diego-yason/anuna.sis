@@ -1,0 +1,29 @@
+{
+    "courseCode": "CCAPDEV",
+    "section": "S15",
+    "classNumber": 1234,
+    "faculty": "LU, LOUIS PATRICE ROBILLO",
+    "schedule": [
+        {
+            "day": ["M"],
+            "start": 0,
+            "end": 90,
+            "room": "ONLINE"
+        },
+        {
+            "day": ["H"],
+            "start": 105,
+            "end": 195,
+            "room": "GK205"
+        },
+        {
+            "day": ["F", "S"],
+            "start": 255,
+            "end": 585,
+            "room": "AG1205"
+        }
+    ],
+    "capacity": 43,
+    "enrolled": 0,
+    "remarks": "HYB/HYBRID"
+}

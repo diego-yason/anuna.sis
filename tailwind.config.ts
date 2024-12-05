@@ -72,6 +72,8 @@ const config: Config = {
             },
             fontFamily: {
                 sans: [...fontFamily.sans],
+                roboto: ["Roboto", ...fontFamily.sans],
+                "roboto-mono": ["Roboto Mono", ...fontFamily.mono],
             },
             keyframes: {
                 "accordion-down": {
