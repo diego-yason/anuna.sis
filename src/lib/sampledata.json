@@ -1,0 +1,23 @@
+{
+    "classNumber": 2111,
+    "courseCode": "CCINFOM",
+    "section": "S11",
+    "schedule": [
+        {
+            "day": ["M"],
+            "timeStart": "0730",
+            "timeEnd": "0900",
+            "room": ""
+        },
+        {
+            "day": ["H"],
+            "timeStart": "0730",
+            "timeEnd": "0900",
+            "room": "GK304B"
+        }
+    ],
+    "faculty": "MALABANAN, OLIVER ARCIAGA",
+    "capacity": 43,
+    "enrolled": 15,
+    "remarks": "HYB /HYBRID"
+}
