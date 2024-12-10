@@ -1,29 +1,123 @@
-{
-    "courseCode": "CCAPDEV",
-    "section": "S15",
-    "classNumber": 1234,
-    "faculty": "LU, LOUIS PATRICE ROBILLO",
-    "schedule": [
-        {
-            "day": ["M"],
-            "start": 0,
-            "end": 90,
-            "room": "ONLINE"
-        },
-        {
-            "day": ["H"],
-            "start": 105,
-            "end": 195,
-            "room": "GK205"
-        },
-        {
-            "day": ["F", "S"],
-            "start": 255,
-            "end": 585,
-            "room": "AG1205"
-        }
-    ],
-    "capacity": 43,
-    "enrolled": 0,
-    "remarks": "HYB/HYBRID"
-}
+[
+    {
+        "courseCode": "CCICOMP",
+        "section": "S11",
+        "classNumber": 2379,
+        "faculty": "CU, JOCELYNN WONG",
+        "schedule": [
+            {
+                "day": ["M"],
+                "start": 0,
+                "end": 90,
+                "room": "ONLINE"
+            },
+            {
+                "day": ["H"],
+                "start": 0,
+                "end": 90,
+                "room": "GK207"
+            },
+            {
+                "day": ["W"],
+                "start": 0,
+                "end": 90,
+                "room": "GK407"
+            }
+        ],
+        "capacity": 40,
+        "enrolled": 0,
+        "remarks": "HYB/HYBRID"
+    },
+    {
+        "courseCode": "CCAPDEV",
+        "section": "S15",
+        "classNumber": 271,
+        "faculty": "LU, LOUIS PATRICE ROBILLO",
+        "schedule": [
+            {
+                "day": ["M"],
+                "start": 0,
+                "end": 90,
+                "room": "ONLINE"
+            },
+            {
+                "day": ["H"],
+                "start": 105,
+                "end": 195,
+                "room": "GK205"
+            }
+        ],
+        "capacity": 43,
+        "enrolled": 0,
+        "remarks": "HYB/HYBRID"
+    },
+    {
+        "courseCode": "MTH101A",
+        "section": "N01",
+        "classNumber": 3473,
+        "faculty": "ERMINO, MARC ALVIN ROLLODA",
+        "schedule": [
+            {
+                "day": ["M", "T"],
+                "start": 105,
+                "end": 195,
+                "room": "ONLINE"
+            },
+            {
+                "day": ["H", "F"],
+                "start": 105,
+                "end": 195,
+                "room": "VL305"
+            }
+        ],
+        "capacity": 35,
+        "enrolled": 0,
+        "remarks": "HYB"
+    },
+    {
+        "courseCode": "CEDISP1",
+        "section": "S11",
+        "classNumber": 196,
+        "faculty": "WONG, KAINAM THOMAS",
+        "schedule": [
+            {
+                "day": ["W"],
+                "start": 105,
+                "end": 195,
+                "room": "GK201"
+            },
+            {
+                "day": ["W"],
+                "start": 210,
+                "end": 300,
+                "room": "GK201"
+            }
+        ],
+        "capacity": 18,
+        "enrolled": 0,
+        "remarks": "HYB /HYBRID"
+    },
+    {
+        "courseCode": "LBYDISP",
+        "section": "S11",
+        "classNumber": 3631,
+        "faculty": "CEMPRON, JONATHAN PAUL CUSI",
+        "schedule": [
+            {
+                "day": ["T"],
+                "start": 105,
+                "end": 195,
+                "room": "ONLINE"
+            },
+            {
+                "day": ["F"],
+                "start": 105,
+                "end": 195,
+                "room": "GK210"
+            }
+        ],
+        "capacity": 30,
+        "enrolled": 0,
+        "remarks": "HYB /HYBRID"
+    }
+]

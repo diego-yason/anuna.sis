@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { Schedule } from "./SectionData";
+    import type { Schedule } from "$types/SectionData";
 
     let { day, end, room, start }: Schedule = $props();
 
@@ -12,7 +12,7 @@
         {#each ["M", "T", "W", "H", "F", "S"] as elemDay}
             {@const isInSchedule = day.some((v) => v === elemDay)}
             <span
-                class="font-roboto-mono text-sm tracking-widest"
+                class="text-md font-roboto-mono tracking-wider"
                 class:text-black={isInSchedule}
                 class:text-gray-300={!isInSchedule}
                 class:dark:text-white={isInSchedule}
@@ -23,6 +23,7 @@
         {/each}
     </div>
     <Time time={start}></Time>
-    <div class="text-center">- to -</div>
+    <div class="my-1 text-center leading-5" class:text-gray-300={start === -450}>to</div>
     <Time time={end}></Time>
+    <div class="text-lg font-semibold">{room}</div>
 </div>
