@@ -9,6 +9,6 @@ export default defineConfig({
         port: 54321,
         user: "postgres",
         password: "postgres",
-        database: "supabase",
+        database: "public",
     },
 });
