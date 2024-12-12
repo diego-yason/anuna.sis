@@ -112,10 +112,8 @@
             <p class="text-lg">Faculty</p>
         </div>
         <div class="flex gap-1">
-            <button onclick={addSectionToCalendar}>
-                <Button>Add to Schedule</Button>
-            </button>
-            <button><Button variant="secondary">Preview in Schedule</Button></button>
+            <Button onclick={addSectionToCalendar}>Add to Schedule</Button>
+            <Button variant="secondary">Preview in Schedule</Button>
         </div>
     </div>
 </div>
