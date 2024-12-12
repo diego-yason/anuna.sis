@@ -1,154 +1,9 @@
 {
-  "id": "a85088ce-7ff1-4ef4-a5f1-663fdfd12f20",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "00000000-0000-0000-0000-000000000000",
+  "prevId": "",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
-    "public.courseEquivalences": {
-      "name": "courseEquivalences",
-      "schema": "",
-      "columns": {
-        "courseA": {
-          "name": "courseA",
-          "type": "varchar(7)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "courseB": {
-          "name": "courseB",
-          "type": "varchar(7)",
-          "primaryKey": false,
-          "notNull": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": true
-    },
-    "public.courseRequisites": {
-      "name": "courseRequisites",
-      "schema": "",
-      "columns": {
-        "requisite": {
-          "name": "requisite",
-          "type": "varchar(7)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "courseCode": {
-          "name": "courseCode",
-          "type": "varchar(7)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "type": {
-          "name": "type",
-          "type": "requisiteEnum",
-          "typeSchema": "public",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": true
-    },
-    "public.courses": {
-      "name": "courses",
-      "schema": "",
-      "columns": {
-        "courseCode": {
-          "name": "courseCode",
-          "type": "varchar(7)",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "fullName": {
-          "name": "fullName",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "units": {
-          "name": "units",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "academic": {
-          "name": "academic",
-          "type": "boolean",
-          "primaryKey": false,
-          "notNull": false,
-          "default": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": true
-    },
-    "public.curriculums": {
-      "name": "curriculums",
-      "schema": "",
-      "columns": {
-        "courseCode": {
-          "name": "courseCode",
-          "type": "varchar(7)",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "program": {
-          "name": "program",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": true
-    },
-    "public.personalSchedules": {
-      "name": "personalSchedules",
-      "schema": "",
-      "columns": {
-        "schedule": {
-          "name": "schedule",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "classNumber": {
-          "name": "classNumber",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": true
-    },
     "public.REF_programs": {
       "name": "REF_programs",
       "schema": "",
@@ -164,8 +19,8 @@
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
-      "policies": {},
       "checkConstraints": {},
+      "policies": {},
       "isRLSEnabled": true
     },
     "public.schedules": {
@@ -174,9 +29,20 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
+          "type": "bigint",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "identity": {
+            "type": "byDefault",
+            "name": "schedules_id_seq",
+            "increment": "1",
+            "minValue": "1",
+            "maxValue": "9223372036854775807",
+            "startWith": "1",
+            "cache": "1",
+            "cycle": false,
+            "schema": "public"
+          }
         },
         "owner": {
           "name": "owner",
@@ -192,133 +58,46 @@
         },
         "term": {
           "name": "term",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": true
-    },
-    "public.sectionSchedules": {
-      "name": "sectionSchedules",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "serial",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "classNumber": {
-          "name": "classNumber",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "term": {
-          "name": "term",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "day": {
-          "name": "day",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "start": {
-          "name": "start",
-          "type": "time",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "end": {
-          "name": "end",
-          "type": "time",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "room": {
-          "name": "room",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.sections": {
-      "name": "sections",
-      "schema": "",
-      "columns": {
-        "classNumber": {
-          "name": "classNumber",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "term": {
-          "name": "term",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "section": {
-          "name": "section",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "courseCode": {
-          "name": "courseCode",
-          "type": "varchar(7)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "capacity": {
-          "name": "capacity",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "enrolled": {
-          "name": "enrolled",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "faculty": {
-          "name": "faculty",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "remarks": {
-          "name": "remarks",
-          "type": "text",
+          "type": "smallint",
           "primaryKey": false,
           "notNull": false
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "schedules_owner_fkey": {
+          "name": "schedules_owner_fkey",
+          "tableFrom": "schedules",
+          "tableTo": "users",
+          "schemaTo": "public",
+          "columnsFrom": [
+            "owner"
+          ],
+          "columnsTo": [
+            "uid"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "schedules_term_fkey": {
+          "name": "schedules_term_fkey",
+          "tableFrom": "schedules",
+          "tableTo": "terms",
+          "schemaTo": "public",
+          "columnsFrom": [
+            "term"
+          ],
+          "columnsTo": [
+            "term"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
-      "policies": {},
       "checkConstraints": {},
+      "policies": {},
       "isRLSEnabled": true
     },
     "public.terms": {
@@ -327,9 +106,20 @@
       "columns": {
         "term": {
           "name": "term",
-          "type": "integer",
+          "type": "smallint",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "identity": {
+            "type": "byDefault",
+            "name": "terms_term_seq",
+            "increment": "1",
+            "minValue": "1",
+            "maxValue": "32767",
+            "startWith": "1",
+            "cache": "1",
+            "cycle": false,
+            "schema": "public"
+          }
         },
         "start": {
           "name": "start",
@@ -348,8 +138,8 @@
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
-      "policies": {},
       "checkConstraints": {},
+      "policies": {},
       "isRLSEnabled": true
     },
     "public.users": {
@@ -366,7 +156,7 @@
           "name": "idNumber",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "username": {
           "name": "username",
@@ -394,33 +184,537 @@
         }
       },
       "indexes": {},
+      "foreignKeys": {
+        "users_major_fkey": {
+          "name": "users_major_fkey",
+          "tableFrom": "users",
+          "tableTo": "REF_programs",
+          "schemaTo": "public",
+          "columnsFrom": [
+            "major"
+          ],
+          "columnsTo": [
+            "name"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "cascade"
+        },
+        "users_minor_fkey": {
+          "name": "users_minor_fkey",
+          "tableFrom": "users",
+          "tableTo": "REF_programs",
+          "schemaTo": "public",
+          "columnsFrom": [
+            "minor"
+          ],
+          "columnsTo": [
+            "name"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "cascade"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "users_username_key": {
+          "columns": [
+            "username"
+          ],
+          "nullsNotDistinct": false,
+          "name": "users_username_key"
+        }
+      },
+      "checkConstraints": {},
+      "policies": {},
+      "isRLSEnabled": true
+    },
+    "public.courses": {
+      "name": "courses",
+      "schema": "",
+      "columns": {
+        "courseCode": {
+          "name": "courseCode",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "fullName": {
+          "name": "fullName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "units": {
+          "name": "units",
+          "type": "smallint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "academic": {
+          "name": "academic",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        }
+      },
+      "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
-      "policies": {},
       "checkConstraints": {},
+      "policies": {},
+      "isRLSEnabled": true
+    },
+    "public.personalSchedules": {
+      "name": "personalSchedules",
+      "schema": "",
+      "columns": {
+        "schedule": {
+          "name": "schedule",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "identity": {
+            "type": "byDefault",
+            "name": "\"personalSchedules_schedule_seq\"",
+            "increment": "1",
+            "minValue": "1",
+            "maxValue": "9223372036854775807",
+            "startWith": "1",
+            "cycle": false,
+            "schema": "public"
+          }
+        },
+        "classNumber": {
+          "name": "classNumber",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "personalSchedules_schedule_fkey": {
+          "name": "personalSchedules_schedule_fkey",
+          "tableFrom": "personalSchedules",
+          "tableTo": "schedules",
+          "schemaTo": "public",
+          "columnsFrom": [
+            "schedule"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        }
+      },
+      "compositePrimaryKeys": {
+        "personalSchedules_pkey": {
+          "name": "personalSchedules_pkey",
+          "columns": [
+            "schedule",
+            "classNumber"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {},
+      "policies": {},
+      "isRLSEnabled": true
+    },
+    "public.courseEquivalences": {
+      "name": "courseEquivalences",
+      "schema": "",
+      "columns": {
+        "courseA": {
+          "name": "courseA",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "courseB": {
+          "name": "courseB",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "courseEquivalences_courseA_fkey": {
+          "name": "courseEquivalences_courseA_fkey",
+          "tableFrom": "courseEquivalences",
+          "tableTo": "courses",
+          "schemaTo": "public",
+          "columnsFrom": [
+            "courseA"
+          ],
+          "columnsTo": [
+            "courseCode"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "courseEquivalences_courseB_fkey": {
+          "name": "courseEquivalences_courseB_fkey",
+          "tableFrom": "courseEquivalences",
+          "tableTo": "courses",
+          "schemaTo": "public",
+          "columnsFrom": [
+            "courseB"
+          ],
+          "columnsTo": [
+            "courseCode"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        }
+      },
+      "compositePrimaryKeys": {
+        "courseEquivalences_pkey": {
+          "name": "courseEquivalences_pkey",
+          "columns": [
+            "courseA",
+            "courseB"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {},
+      "policies": {},
+      "isRLSEnabled": true
+    },
+    "public.curriculums": {
+      "name": "curriculums",
+      "schema": "",
+      "columns": {
+        "courseCode": {
+          "name": "courseCode",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "program": {
+          "name": "program",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "curriculums_courseCode_fkey": {
+          "name": "curriculums_courseCode_fkey",
+          "tableFrom": "curriculums",
+          "tableTo": "courses",
+          "schemaTo": "public",
+          "columnsFrom": [
+            "courseCode"
+          ],
+          "columnsTo": [
+            "courseCode"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "curriculums_program_fkey": {
+          "name": "curriculums_program_fkey",
+          "tableFrom": "curriculums",
+          "tableTo": "REF_programs",
+          "schemaTo": "public",
+          "columnsFrom": [
+            "program"
+          ],
+          "columnsTo": [
+            "name"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        }
+      },
+      "compositePrimaryKeys": {
+        "curriculums_pkey": {
+          "name": "curriculums_pkey",
+          "columns": [
+            "courseCode",
+            "program"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {},
+      "policies": {},
+      "isRLSEnabled": true
+    },
+    "public.courseRequisites": {
+      "name": "courseRequisites",
+      "schema": "",
+      "columns": {
+        "requisite": {
+          "name": "requisite",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "incoming": {
+          "name": "incoming",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "type": {
+          "name": "type",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "courseRequisites_requisite_fkey": {
+          "name": "courseRequisites_requisite_fkey",
+          "tableFrom": "courseRequisites",
+          "tableTo": "courses",
+          "schemaTo": "public",
+          "columnsFrom": [
+            "requisite"
+          ],
+          "columnsTo": [
+            "courseCode"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "courseRequisites_incoming_fkey": {
+          "name": "courseRequisites_incoming_fkey",
+          "tableFrom": "courseRequisites",
+          "tableTo": "courses",
+          "schemaTo": "public",
+          "columnsFrom": [
+            "incoming"
+          ],
+          "columnsTo": [
+            "courseCode"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        }
+      },
+      "compositePrimaryKeys": {
+        "courseRequisites_pkey": {
+          "name": "courseRequisites_pkey",
+          "columns": [
+            "requisite",
+            "incoming"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {},
+      "policies": {},
+      "isRLSEnabled": true
+    },
+    "public.sectionSchedules": {
+      "name": "sectionSchedules",
+      "schema": "",
+      "columns": {
+        "classNumber": {
+          "name": "classNumber",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "term": {
+          "name": "term",
+          "type": "smallint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "day": {
+          "name": "day",
+          "type": "varchar[]",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "start": {
+          "name": "start",
+          "type": "time",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "end": {
+          "name": "end",
+          "type": "time",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "room": {
+          "name": "room",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "sectionSchedules_term_classNumber_fkey": {
+          "name": "sectionSchedules_term_classNumber_fkey",
+          "tableFrom": "sectionSchedules",
+          "tableTo": "sections",
+          "schemaTo": "public",
+          "columnsFrom": [
+            "classNumber",
+            "term"
+          ],
+          "columnsTo": [
+            "classNumber",
+            "term"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        }
+      },
+      "compositePrimaryKeys": {
+        "sectionSchedules_pkey": {
+          "name": "sectionSchedules_pkey",
+          "columns": [
+            "classNumber",
+            "term",
+            "day"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {},
+      "policies": {},
+      "isRLSEnabled": true
+    },
+    "public.sections": {
+      "name": "sections",
+      "schema": "",
+      "columns": {
+        "classNumber": {
+          "name": "classNumber",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "term": {
+          "name": "term",
+          "type": "smallint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "section": {
+          "name": "section",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "courseCode": {
+          "name": "courseCode",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "capacity": {
+          "name": "capacity",
+          "type": "smallint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "enrolled": {
+          "name": "enrolled",
+          "type": "smallint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "faculty": {
+          "name": "faculty",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "remarks": {
+          "name": "remarks",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "sections_term_fkey": {
+          "name": "sections_term_fkey",
+          "tableFrom": "sections",
+          "tableTo": "terms",
+          "schemaTo": "public",
+          "columnsFrom": [
+            "term"
+          ],
+          "columnsTo": [
+            "term"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "sections_courseCode_fkey": {
+          "name": "sections_courseCode_fkey",
+          "tableFrom": "sections",
+          "tableTo": "courses",
+          "schemaTo": "public",
+          "columnsFrom": [
+            "courseCode"
+          ],
+          "columnsTo": [
+            "courseCode"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        }
+      },
+      "compositePrimaryKeys": {
+        "sections_pkey": {
+          "name": "sections_pkey",
+          "columns": [
+            "classNumber",
+            "term"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {},
+      "policies": {},
       "isRLSEnabled": true
     }
   },
-  "enums": {
-    "public.requisiteEnum": {
-      "name": "requisiteEnum",
-      "schema": "public",
-      "values": [
-        "H",
-        "S",
-        "C"
-      ]
-    }
-  },
+  "enums": {},
   "schemas": {},
   "sequences": {},
   "roles": {},
   "policies": {},
   "views": {},
   "_meta": {
-    "columns": {},
     "schemas": {},
-    "tables": {}
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "tables": {
+      "sectionSchedules": {
+        "columns": {
+          "day": {
+            "isArray": true,
+            "dimensions": 1,
+            "rawType": "character varying"
+          }
+        }
+      }
+    }
   }
 }
