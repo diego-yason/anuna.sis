@@ -72,6 +72,7 @@ export const actions = {
         const data: SectionData[] = [];
 
         // TODO: add reoccurrence checks
+        // TODO: integrate to DB
         let hasNext: boolean;
         let page = 1;
         do {
@@ -123,7 +124,7 @@ export const actions = {
                             day,
                             start,
                             end,
-                            room,
+                            room: room.trim(),
                         };
                     }),
                     remarks: type,
