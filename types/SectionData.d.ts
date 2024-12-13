@@ -2,17 +2,17 @@ export interface SectionData {
     courseCode: string;
     section: string;
     classNumber: number;
-    faculty: string;
+    faculty: string | null;
     schedule: Schedule[];
     capacity: number;
     enrolled: number;
-    remarks: string;
+    remarks: string | null;
 }
 
 export interface Schedule {
     // day: Days[];
     day: string[];
-    start: number;
-    end: number;
-    room: string;
+    start: number | null;
+    end: number | null;
+    room: string | null;
 }

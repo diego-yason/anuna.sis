@@ -22,8 +22,21 @@
             </span>
         {/each}
     </div>
-    <Time time={start}></Time>
-    <div class="my-1 text-center leading-5" class:text-gray-300={start === -450}>to</div>
-    <Time time={end}></Time>
+    {#if start === null}
+        <Time time={-450}></Time>
+    {:else}
+        <Time time={start}></Time>
+    {/if}
+    <div
+        class="my-1 text-center leading-5"
+        class:text-gray-300={start === -450 || start === null}
+    >
+        to
+    </div>
+    {#if end === null}
+        <Time time={-450}></Time>
+    {:else}
+        <Time time={end}></Time>
+    {/if}
     <div class="text-lg font-semibold">{room}</div>
 </div>

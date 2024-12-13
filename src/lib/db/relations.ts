@@ -1,5 +1,3 @@
-// drizzle-kit generated
-
 import { relations } from "drizzle-orm/relations";
 import {
     users,

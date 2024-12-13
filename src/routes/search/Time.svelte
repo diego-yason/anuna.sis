@@ -9,7 +9,7 @@
     let isAm = hour < 12;
 </script>
 
-<div class="font-funnel-display font-roboto-mono flex items-center align-middle">
+<div class="font-funnel-display flex items-center align-middle font-roboto-mono">
     <span class:text-gray-300={minutesSince730 == -450} class="text-3xl font-semibold">
         {hour12.toString().padStart(2, "0")}:{minute.toString().padStart(2, "0")}
     </span>

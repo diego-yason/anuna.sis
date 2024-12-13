@@ -32,6 +32,14 @@
                         start: secstart,
                         end: secend,
                     } of section.schedule) {
+                        if (
+                            start === null ||
+                            end === null ||
+                            secstart === null ||
+                            secend === null
+                        )
+                            return; // exempted from time conflict check
+
                         if (secdays.includes(day)) {
                             if (start >= secstart && start <= secend) {
                                 toast.error("Time conflict");
