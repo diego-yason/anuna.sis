@@ -4,8 +4,8 @@
         "name": "Home"
     },
     {
-        "href": "/section",
-        "name": "Section (dev)"
+        "href": "/search",
+        "name": "Search"
     },
     {
         "href": "/calendar",
@@ -14,5 +14,9 @@
     {
         "href": "/auth",
         "name": "Auth (test)"
+    },
+    {
+        "href": "/test",
+        "name": "Test"
     }
 ]

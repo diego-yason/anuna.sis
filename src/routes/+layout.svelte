@@ -30,6 +30,9 @@
     {#each links as { name, href }}
         <Button {href}>{name}</Button>
     {/each}
+    {#if session}
+        <Button onclick={() => supabase.auth.signOut()}>Sign out</Button>
+    {/if}
 </nav>
 
 <Toaster></Toaster>
