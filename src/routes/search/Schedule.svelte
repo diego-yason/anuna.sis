@@ -38,5 +38,12 @@
     {:else}
         <Time time={end}></Time>
     {/if}
-    <div class="text-lg font-semibold">{room}</div>
+    {#if room != "*"}
+        <div class="text-lg font-semibold">{room}</div>
+    {:else}
+        <div class="flex flex-col text-lg font-semibold">
+            <span class="">ONLINE</span>
+            <span class="text-center text-xs leading-3">(maybe)</span>
+        </div>
+    {/if}
 </div>

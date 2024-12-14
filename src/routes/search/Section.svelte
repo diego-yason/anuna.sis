@@ -1,5 +1,7 @@
 <script lang="ts">
     import type { SectionData } from "$types/SectionData";
+    import clip from "@arendjr/text-clipper";
+    import * as Tooltip from "$lib/components/ui/tooltip";
 
     let sec: SectionData = $props();
 
@@ -68,23 +70,25 @@
     border bg-card p-2 text-2xl text-card-foreground shadow"
 >
     <div class="flex justify-between gap-3">
-        <div class="flex flex-col">
+        <div class="flex flex-grow flex-col">
             <p class="text-center text-2xl font-semibold leading-none tracking-tight">
                 {courseCode}
             </p>
-            <div class="grid grid-cols-2">
+            <div class="grid grid-cols-2 gap-2">
                 <div class="flex flex-col text-center">
                     <span class="text-3xl font-bold">{section}</span>
                     <span class="text-xl">{classNumber}</span>
                 </div>
-                <div>
+                <div class="flex flex-col text-center">
                     <span class="font-roboto-mono text-5xl">{enrolled}</span>
                     <span class="font-mono text-xl">/{capacity}</span>
                     <!-- <span class="text-xl">enrolled</span> -->
                 </div>
             </div>
             <div class="flex flex-grow flex-col p-3">
-                <p class="flex flex-grow items-center justify-center text-xl font-medium">
+                <p
+                    class="flex flex-grow items-center justify-center text-center text-xl font-medium"
+                >
                     {remarks}
                 </p>
                 <p class="text-center text-lg">Remarks</p>
@@ -116,7 +120,19 @@
     </div>
     <div class="flex justify-between">
         <div class="">
-            <p class="truncate text-ellipsis text-xl font-semibold">{faculty}</p>
+            <Tooltip.Provider>
+                <Tooltip.Root>
+                    <Tooltip.Trigger
+                        class="text-xl font-semibold underline decoration-slate-400"
+                    >
+                        {clip(faculty ?? "¯\\\_(ツ)_/¯", 25, { breakWords: true })}
+                    </Tooltip.Trigger>
+                    <Tooltip.Content
+                        >{faculty ??
+                            "its blind enlistment bruh what i can i do"}</Tooltip.Content
+                    >
+                </Tooltip.Root>
+            </Tooltip.Provider>
             <p class="text-lg">Faculty</p>
         </div>
         <div class="flex gap-1">

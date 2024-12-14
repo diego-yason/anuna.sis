@@ -21,7 +21,7 @@
         "@types/lodash": "^4.17.13",
         "@types/node": "^22.10.2",
         "autoprefixer": "^10.4.20",
-        "bits-ui": "1.0.0-next.69",
+        "bits-ui": "1.0.0-next.71",
         "clsx": "^2.1.1",
         "eslint": "^9.16.0",
         "eslint-config-prettier": "^9.1.0",
@@ -44,6 +44,7 @@
         "vite": "^6.0.3"
     },
     "dependencies": {
+        "@arendjr/text-clipper": "npm:@jsr/arendjr__text-clipper@^3.0.0",
         "@supabase/ssr": "^0.5.2",
         "@supabase/supabase-js": "^2.47.5",
         "@tailwindcss/container-queries": "^0.1.1",

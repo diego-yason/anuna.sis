@@ -70,7 +70,7 @@ export const load = async ({ locals: { supabase } }) => {
                                         day: [day ?? ""],
                                         start,
                                         end,
-                                        room: room,
+                                        room: room ?? "*",
                                     });
                                 }
 

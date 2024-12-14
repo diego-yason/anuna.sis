@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@arendjr/text-clipper':
+        specifier: npm:@jsr/arendjr__text-clipper@^3.0.0
+        version: '@jsr/arendjr__text-clipper@3.0.0'
       '@supabase/ssr':
         specifier: ^0.5.2
         version: 0.5.2(@supabase/supabase-js@2.47.6)
@@ -61,8 +64,8 @@ importers:
         specifier: ^10.4.20
         version: 10.4.20(postcss@8.4.49)
       bits-ui:
-        specifier: 1.0.0-next.69
-        version: 1.0.0-next.69(svelte@5.10.0)
+        specifier: 1.0.0-next.71
+        version: 1.0.0-next.71(svelte@5.10.0)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -374,6 +377,9 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
+
+  '@jsr/arendjr__text-clipper@3.0.0':
+    resolution: {integrity: sha512-Uu3CYSvFrNdDkYKEaEKHAk0decaxVFlSSqf50Okte/9vJjO2rESzPF1ngQjS9H1aX45RIXRGMYOXJ/LPDFwUdQ==, tarball: https://npm.jsr.io/~/11/@jsr/arendjr__text-clipper/3.0.0.tgz}
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -703,8 +709,8 @@ packages:
     resolution: {integrity: sha512-Ceh+7ox5qe7LJuLHoY0feh3pHuUDHAcRUeyL2VYghZwfpkNIy/+8Ocg0a3UuSoYzavmylwuLWQOf3hl0jjMMIw==}
     engines: {node: '>=8'}
 
-  bits-ui@1.0.0-next.69:
-    resolution: {integrity: sha512-XN7Uso5gmI4GFtb/5zzce9sSzH/39gX3q6pxoSkV9bAa5mN9Lc+R6hZUDgx3cGY/quWBF/wFPqXgk27Nw2VkSw==}
+  bits-ui@1.0.0-next.71:
+    resolution: {integrity: sha512-ncZ42GwVpa1Ldw41opdLqP/HSkhNGNBnmfvWduYGZ0cVzDnkPwsUWvdikTsFI31ZoAMcfcUVFSVgLGCcBatUXQ==}
     engines: {node: '>=18', pnpm: '>=8.7.0'}
     peerDependencies:
       svelte: ^5.0.0-next.1
@@ -1902,6 +1908,8 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
+  '@jsr/arendjr__text-clipper@3.0.0': {}
+
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
       '@nodelib/fs.stat': 2.0.5
@@ -2243,7 +2251,7 @@ snapshots:
 
   binary-extensions@2.3.0: {}
 
-  bits-ui@1.0.0-next.69(svelte@5.10.0):
+  bits-ui@1.0.0-next.71(svelte@5.10.0):
     dependencies:
       '@floating-ui/core': 1.6.8
       '@floating-ui/dom': 1.6.12
