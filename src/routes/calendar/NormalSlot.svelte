@@ -14,7 +14,7 @@
         return `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}${pm ? "pm" : "am"}`;
     };
 
-    const totalTime = daySchedule.end - daySchedule.start;
+    const totalTime = daySchedule.end! - daySchedule.start!;
 
     // 810 mins in a day
     // 1 min = 0.12%
@@ -24,7 +24,7 @@
     onMount(() => {
         const style = element.style;
         style.height = `${size - 1}%`;
-        style.top = `${(daySchedule.start / 810) * 100}%`;
+        style.top = `${(daySchedule.start! / 810) * 100}%`;
     });
 
     import { removeSection } from "$lib/localStorage/calendar";
@@ -58,13 +58,17 @@
 >
     <div class="flex items-start justify-between">
         <p class="text-xl font-semibold">{courseCode}</p>
-        <p>{denormalizeTime(daySchedule.start) ?? ""}</p>
+        <p>{denormalizeTime(daySchedule.start!) ?? ""}</p>
     </div>
     <p class="mb-1 leading-none">{section}</p>
-    <p class="text-xl font-medium">{daySchedule.room ?? ""}</p>
+    {#if daySchedule.room == "*"}
+        <p class="text-xl font-medium">ONLINE (maybe)</p>
+    {:else}
+        <p class="text-xl font-medium">{daySchedule.room ?? ""}</p>
+    {/if}
     <div class="flex items-end justify-between">
-        <p class="text-lg">{faculty.split(",")[0] ?? "Unknown"}</p>
-        <p class="">{denormalizeTime(daySchedule.end) ?? ""}</p>
+        <p class="text-lg">{faculty?.split(",")[0] ?? "Unknown"}</p>
+        <p class="">{denormalizeTime(daySchedule.end!) ?? ""}</p>
     </div>
 </div>
 
@@ -91,8 +95,8 @@
                         {#each schedule as { day, start, end, room }}
                             <Table.Row>
                                 <Table.Cell>{day}</Table.Cell>
-                                <Table.Cell>{denormalizeTime(start)}</Table.Cell>
-                                <Table.Cell>{denormalizeTime(end)}</Table.Cell>
+                                <Table.Cell>{denormalizeTime(start!)}</Table.Cell>
+                                <Table.Cell>{denormalizeTime(end!)}</Table.Cell>
                                 <Table.Cell>{room}</Table.Cell>
                             </Table.Row>
                         {/each}

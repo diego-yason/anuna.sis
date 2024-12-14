@@ -2,6 +2,8 @@ import { scrape } from "$lib/server/scraper/index";
 
 export const load = async () => {
     scrape(
+        "PE2FTEX",
+        "POLPHIM",
         "CALENG1",
         "GEUSELF",
         "CCPROG1",

@@ -195,7 +195,7 @@ export async function scrape(...courseCodes: string[]): Promise<void> {
                             day,
                         } as TablesInsert<"sectionSchedules">,
                         {
-                            onConflict: "section_id, day",
+                            onConflict: "section_id, day, start",
                         }
                     )
                     .then(({ error }) => {
