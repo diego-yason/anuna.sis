@@ -1,4 +1,4 @@
-import { pgTable, foreignKey, smallint, uuid, text, varchar, boolean, date, unique, integer, primaryKey, bigint, time } from "drizzle-orm/pg-core"
+import { pgTable, foreignKey, smallint, uuid, text, varchar, boolean, date, unique, integer, primaryKey, bigint, time, pgPolicy } from "drizzle-orm/pg-core"
 import { sql } from "drizzle-orm"
 
 
@@ -126,8 +126,7 @@ export const courseRequisites = pgTable("courseRequisites", {
 ]);
 
 export const sectionSchedules = pgTable("sectionSchedules", {
-	// You can use { mode: "bigint" } if numbers are exceeding js number limitations
-	classNumber: bigint({ mode: "number" }).notNull(),
+	classNumber: integer().notNull(),
 	term: smallint().notNull(),
 	day: varchar().notNull(),
 	start: time(),
@@ -143,8 +142,7 @@ export const sectionSchedules = pgTable("sectionSchedules", {
 ]);
 
 export const sections = pgTable("sections", {
-	// You can use { mode: "bigint" } if numbers are exceeding js number limitations
-	classNumber: bigint({ mode: "number" }).notNull(),
+	classNumber: integer().notNull(),
 	term: smallint().notNull(),
 	section: text().notNull(),
 	courseCode: varchar().notNull(),
@@ -164,4 +162,5 @@ export const sections = pgTable("sections", {
 			name: "sections_courseCode_fkey"
 		}).onUpdate("cascade").onDelete("cascade"),
 	primaryKey({ columns: [table.classNumber, table.term], name: "sections_pkey"}),
+	pgPolicy("Enable read access for all users", { as: "permissive", for: "select", to: ["public"], using: sql`true` }),
 ]);
