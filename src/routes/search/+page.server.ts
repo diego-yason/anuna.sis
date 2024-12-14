@@ -1,66 +1,92 @@
-import { db } from "$lib/db";
 import type { SectionData, Schedule } from "$types/SectionData";
 import type { Response as ArcherResponse } from "$types/ArcherResponse";
 
-function convertTime(time: string | null): number | null {
-    if (time === null) return null;
-
-    const [hours, minutes] = time.split(":").map(Number);
-
-    return hours * 60 + minutes - 450; // normalize to 7:30 AM
-}
-
-export const load = async () => {
+export const load = async ({ locals: { supabase } }) => {
     return {
         sections: new Promise<SectionData[]>((resolve, reject) => {
-            db.query.sections
-                .findMany({
-                    with: {
-                        sectionSchedules: true,
-                    },
-                })
-                .then((data) => {
-                    const sections: SectionData[] = data.map((section) => {
-                        const schedule: Schedule[] = [];
+            supabase
+                .from("sections")
+                .select("*,sectionSchedules(*)")
+                .then(({ data, error }) => {
+                    if (error) {
+                        reject(error);
+                        return;
+                    }
 
-                        for (const sectionSchedule of section.sectionSchedules) {
-                            const start = convertTime(sectionSchedule.start);
-                            const end = convertTime(sectionSchedule.end);
+                    if (data === null) {
+                        resolve([]);
+                        return;
+                    }
 
-                            const index = schedule.findIndex(
-                                (s) =>
-                                    s.start === start &&
-                                    s.end === end &&
-                                    s.room === sectionSchedule.room
-                            );
-                            if (index === -1) {
-                                schedule.push({
-                                    day: [sectionSchedule.day],
-                                    start,
-                                    end,
-                                    room: sectionSchedule.room,
-                                });
-                            } else {
-                                schedule[index].day.push(sectionSchedule.day);
+                    // merge days appropriately
+                    // const sectionData: SectionData[] =
+
+                    resolve(
+                        data.map(
+                            ({
+                                capacity,
+                                class_number: classNumber,
+                                course_code: courseCode,
+                                enrolled,
+                                faculty,
+                                remarks,
+                                section,
+                                sectionSchedules,
+                            }): SectionData => {
+                                const schedules: Schedule[] = [];
+
+                                console.log(sectionSchedules);
+                                for (const schedule of sectionSchedules) {
+                                    const { day, room } = schedule;
+
+                                    const getNormalizedTime = (time: string | null) => {
+                                        if (time === null) return -450;
+
+                                        const [hours, minutes] = time
+                                            .split(":")
+                                            .map(Number);
+
+                                        return hours * 60 + minutes - 450;
+                                    };
+
+                                    const start = getNormalizedTime(schedule.start);
+                                    const end = getNormalizedTime(schedule.end);
+
+                                    const index = schedules.findIndex(
+                                        (schedule) =>
+                                            schedule.start === start &&
+                                            schedule.end === end &&
+                                            schedule.room === room
+                                    );
+
+                                    if (index !== -1) {
+                                        schedules[index].day.push(day ?? "");
+                                        continue;
+                                    }
+
+                                    // TODO: review if this is the way to go
+                                    // (the null operand)
+                                    schedules.push({
+                                        day: [day ?? ""],
+                                        start,
+                                        end,
+                                        room: room,
+                                    });
+                                }
+
+                                return {
+                                    capacity,
+                                    classNumber,
+                                    courseCode,
+                                    enrolled,
+                                    faculty,
+                                    remarks,
+                                    schedule: schedules,
+                                    section,
+                                };
                             }
-                        }
-
-                        return {
-                            courseCode: section.courseCode,
-                            section: section.section,
-                            classNumber: section.classNumber,
-                            faculty: section.faculty,
-                            schedule,
-                            capacity: section.capacity,
-                            enrolled: section.enrolled,
-                            remarks: section.remarks,
-                        };
-                    });
-
-                    resolve(sections);
-                })
-                .catch((error) => {
-                    reject(error);
+                        )
+                    );
                 });
         }),
     };

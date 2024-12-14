@@ -4,6 +4,8 @@
     // import SectionDataArr from "./SectionData.json";
     let { data } = $props();
     let { sections } = $derived(data);
+
+    data.sections.then((data) => console.log(data));
 </script>
 
 <div class="m-5">

@@ -36,46 +36,52 @@ export type Database = {
     Tables: {
       courseEquivalences: {
         Row: {
-          courseA: string
-          courseB: string
+          coursea: string
+          courseb: string
+          id: number
         }
         Insert: {
-          courseA: string
-          courseB: string
+          coursea: string
+          courseb: string
+          id?: number
         }
         Update: {
-          courseA?: string
-          courseB?: string
+          coursea?: string
+          courseb?: string
+          id?: number
         }
         Relationships: [
           {
-            foreignKeyName: "courseEquivalences_courseA_fkey"
-            columns: ["courseA"]
+            foreignKeyName: "courseEquivalences_coursea_fkey"
+            columns: ["coursea"]
             isOneToOne: false
             referencedRelation: "courses"
-            referencedColumns: ["courseCode"]
+            referencedColumns: ["course_code"]
           },
           {
-            foreignKeyName: "courseEquivalences_courseB_fkey"
-            columns: ["courseB"]
+            foreignKeyName: "courseEquivalences_courseb_fkey"
+            columns: ["courseb"]
             isOneToOne: false
             referencedRelation: "courses"
-            referencedColumns: ["courseCode"]
+            referencedColumns: ["course_code"]
           },
         ]
       }
       courseRequisites: {
         Row: {
+          id: number
           incoming: string
           requisite: string
           type: string
         }
         Insert: {
+          id?: number
           incoming: string
           requisite: string
           type: string
         }
         Update: {
+          id?: number
           incoming?: string
           requisite?: string
           type?: string
@@ -86,58 +92,61 @@ export type Database = {
             columns: ["incoming"]
             isOneToOne: false
             referencedRelation: "courses"
-            referencedColumns: ["courseCode"]
+            referencedColumns: ["course_code"]
           },
           {
             foreignKeyName: "courseRequisites_requisite_fkey"
             columns: ["requisite"]
             isOneToOne: false
             referencedRelation: "courses"
-            referencedColumns: ["courseCode"]
+            referencedColumns: ["course_code"]
           },
         ]
       }
       courses: {
         Row: {
           academic: boolean | null
-          courseCode: string
-          fullName: string | null
+          course_code: string
+          full_name: string | null
           units: number
         }
         Insert: {
           academic?: boolean | null
-          courseCode: string
-          fullName?: string | null
+          course_code: string
+          full_name?: string | null
           units: number
         }
         Update: {
           academic?: boolean | null
-          courseCode?: string
-          fullName?: string | null
+          course_code?: string
+          full_name?: string | null
           units?: number
         }
         Relationships: []
       }
       curriculums: {
         Row: {
-          courseCode: string
+          course_code: string
+          id: number
           program: string
         }
         Insert: {
-          courseCode: string
+          course_code: string
+          id?: number
           program: string
         }
         Update: {
-          courseCode?: string
+          course_code?: string
+          id?: number
           program?: string
         }
         Relationships: [
           {
-            foreignKeyName: "curriculums_courseCode_fkey"
-            columns: ["courseCode"]
+            foreignKeyName: "curriculums_course_code_fkey"
+            columns: ["course_code"]
             isOneToOne: false
             referencedRelation: "courses"
-            referencedColumns: ["courseCode"]
+            referencedColumns: ["course_code"]
           },
           {
             foreignKeyName: "curriculums_program_fkey"
@@ -150,16 +159,19 @@ export type Database = {
       }
       personalSchedules: {
         Row: {
-          classNumber: number
+          id: number
           schedule: number
+          section_id: number
         }
         Insert: {
-          classNumber: number
+          id?: number
           schedule: number
+          section_id: number
         }
         Update: {
-          classNumber?: number
+          id?: number
           schedule?: number
+          section_id?: number
         }
         Relationships: [
           {
@@ -167,6 +179,13 @@ export type Database = {
             columns: ["schedule"]
             isOneToOne: false
             referencedRelation: "schedules"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "personalSchedules_section_id_fkey"
+            columns: ["section_id"]
+            isOneToOne: false
+            referencedRelation: "sections"
             referencedColumns: ["id"]
           },
         ]
@@ -188,19 +207,19 @@ export type Database = {
           id: number
           name: string | null
           owner: string
-          term: number | null
+          term: number
         }
         Insert: {
           id?: number
           name?: string | null
           owner: string
-          term?: number | null
+          term: number
         }
         Update: {
           id?: number
           name?: string | null
           owner?: string
-          term?: number | null
+          term?: number
         }
         Relationships: [
           {
@@ -222,83 +241,79 @@ export type Database = {
       sections: {
         Row: {
           capacity: number
-          classNumber: number
-          courseCode: string
+          class_number: number
+          course_code: string
           enrolled: number
           faculty: string | null
+          id: number
           remarks: string | null
           section: string
           term: number
         }
         Insert: {
           capacity: number
-          classNumber: number
-          courseCode: string
+          class_number: number
+          course_code: string
           enrolled: number
           faculty?: string | null
+          id?: number
           remarks?: string | null
           section: string
           term: number
         }
         Update: {
           capacity?: number
-          classNumber?: number
-          courseCode?: string
+          class_number?: number
+          course_code?: string
           enrolled?: number
           faculty?: string | null
+          id?: number
           remarks?: string | null
           section?: string
           term?: number
         }
         Relationships: [
           {
-            foreignKeyName: "sections_courseCode_fkey"
-            columns: ["courseCode"]
+            foreignKeyName: "sections_course_code_fkey"
+            columns: ["course_code"]
             isOneToOne: false
             referencedRelation: "courses"
-            referencedColumns: ["courseCode"]
-          },
-          {
-            foreignKeyName: "sections_term_fkey"
-            columns: ["term"]
-            isOneToOne: false
-            referencedRelation: "terms"
-            referencedColumns: ["term"]
+            referencedColumns: ["course_code"]
           },
         ]
       }
       sectionSchedules: {
         Row: {
-          classNumber: number
-          day: string
-          end: number | null
+          day: string | null
+          end: string | null
+          id: number
           room: string | null
-          start: number | null
-          term: number
+          section_id: number
+          start: string | null
         }
         Insert: {
-          classNumber: number
-          day: string
-          end?: number | null
+          day?: string | null
+          end?: string | null
+          id?: number
           room?: string | null
-          start?: number | null
-          term: number
+          section_id: number
+          start?: string | null
         }
         Update: {
-          classNumber?: number
-          day?: string
-          end?: number | null
+          day?: string | null
+          end?: string | null
+          id?: number
           room?: string | null
-          start?: number | null
-          term?: number
+          section_id?: number
+          start?: string | null
         }
         Relationships: [
           {
-            foreignKeyName: "sectionSchedules_term_classNumber_fkey"
-            columns: ["term", "classNumber"]
+            foreignKeyName: "sectionSchedules_section_id_fkey"
+            columns: ["section_id"]
             isOneToOne: false
             referencedRelation: "sections"
-            referencedColumns: ["term", "classNumber"]
+            referencedColumns: ["id"]
           },
         ]
       }
@@ -311,7 +326,7 @@ export type Database = {
         Insert: {
           end: string
           start: string
-          term?: number
+          term: number
         }
         Update: {
           end?: string
@@ -322,24 +337,24 @@ export type Database = {
       }
       users: {
         Row: {
-          displayName: string | null
-          idNumber: number
+          display_name: string | null
+          id_number: number | null
           major: string | null
           minor: string | null
           uid: string
           username: string
         }
         Insert: {
-          displayName?: string | null
-          idNumber: number
+          display_name?: string | null
+          id_number?: number | null
           major?: string | null
           minor?: string | null
           uid: string
           username: string
         }
         Update: {
-          displayName?: string | null
-          idNumber?: number
+          display_name?: string | null
+          id_number?: number | null
           major?: string | null
           minor?: string | null
           uid?: string

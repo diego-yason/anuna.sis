@@ -3,6 +3,7 @@ import { PythonShell } from "python-shell";
 import { readFile, unlink } from "node:fs/promises";
 
 import type { SectionData, Schedule } from "$types/SectionData";
+import type { TablesInsert } from "$types/database";
 import { admin } from "../supabase";
 
 function normalizeTime(time: string): number {
@@ -97,6 +98,7 @@ export async function scrape(...courseCodes: string[]): Promise<void> {
             json.splice(0, nextSectionIndex);
         }
         unlink(`${pathHead}/raw/${courseCode.toLowerCase()}.json`); // dont need to wait for this
+
         return sections;
     }
 
@@ -126,18 +128,19 @@ export async function scrape(...courseCodes: string[]): Promise<void> {
     });
 
     // add to db
-    const { error } = await admin.from("courses").upsert(
-        codes.map((v) => ({
-            courseCode: v,
-            units: 3,
-        })),
+    const { error: courseError } = await admin.from("courses").upsert(
+        codes.map(
+            (v): TablesInsert<"courses"> => ({
+                course_code: v,
+                units: 3,
+            })
+        ),
         { ignoreDuplicates: true }
     );
-
-    console.error(error);
+    if (courseError) console.error("Courses: ", courseError);
 
     // insert into db
-    await admin.from("sections").upsert(
+    const { error: sectionError } = await admin.from("sections").upsert(
         merged.map(
             ({
                 capacity,
@@ -147,11 +150,11 @@ export async function scrape(...courseCodes: string[]): Promise<void> {
                 faculty,
                 remarks,
                 section,
-            }) => ({
+            }): TablesInsert<"sections"> => ({
                 term: 1242, // hardcoded for now
                 capacity,
-                classNumber,
-                courseCode,
+                class_number: classNumber,
+                course_code: courseCode,
                 enrolled,
                 section,
                 remarks,
@@ -159,34 +162,44 @@ export async function scrape(...courseCodes: string[]): Promise<void> {
             })
         ),
         {
-            ignoreDuplicates: true, // TODO: not
+            onConflict: "class_number, term",
         }
     );
+    if (sectionError) console.error("Sections: ", sectionError);
 
     const scheduleInsert: Promise<unknown>[] = [];
 
     for (const { schedule: schedules, classNumber } of merged) {
         for (const schedule of schedules) {
+            const { data } = await admin
+                .from("sections")
+                .select("id")
+                .eq("class_number", classNumber)
+                .eq("term", 1242) // temporarily hardcoded
+                .single();
             for (const day of schedule.day) {
                 admin
                     .from("sectionSchedules")
-                    .insert({
-                        // @ts-expect-error im not sure honestly
-                        classNumber,
-                        day,
-                        term: 1242, // hardcoded for now
-                        start:
-                            schedule.start == -450 || schedule.start == null
-                                ? null
-                                : denormalizeTime(schedule.start),
-                        end:
-                            schedule.end == -450 || schedule.end == null
-                                ? null
-                                : denormalizeTime(schedule.end),
-                        room: schedule.room,
-                    })
-                    .then(({ data, error }) => {
-                        if (error) console.error(error);
+                    .upsert(
+                        {
+                            section_id: data!.id,
+                            start:
+                                schedule.start == -450 || schedule.start == null
+                                    ? null
+                                    : denormalizeTime(schedule.start),
+                            end:
+                                schedule.end == -450 || schedule.end == null
+                                    ? null
+                                    : denormalizeTime(schedule.end),
+                            room: schedule.room,
+                            day,
+                        } as TablesInsert<"sectionSchedules">,
+                        {
+                            onConflict: "section_id, day",
+                        }
+                    )
+                    .then(({ error }) => {
+                        if (error) console.error("Section Schedule", error);
                     }); // force run
             }
         }
