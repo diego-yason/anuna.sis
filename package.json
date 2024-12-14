@@ -9,9 +9,7 @@
         "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
         "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
         "format": "prettier --write .",
-        "lint": "prettier --check . && eslint .",
-        "db:generate": "drizzle-kit generate",
-        "db:push": "drizzle-kit push"
+        "lint": "prettier --check . && eslint ."
     },
     "devDependencies": {
         "@eslint/compat": "^1.2.4",
@@ -21,11 +19,10 @@
         "@tailwindcss/forms": "^0.5.9",
         "@types/deep-equal": "^1.0.4",
         "@types/lodash": "^4.17.13",
-        "@types/node": "^22.10.1",
+        "@types/node": "^22.10.2",
         "autoprefixer": "^10.4.20",
         "bits-ui": "1.0.0-next.69",
         "clsx": "^2.1.1",
-        "drizzle-kit": "^0.30.0",
         "eslint": "^9.16.0",
         "eslint-config-prettier": "^9.1.0",
         "eslint-plugin-svelte": "^2.46.1",
@@ -52,8 +49,8 @@
         "@tailwindcss/container-queries": "^0.1.1",
         "@tailwindcss/typography": "^0.5.15",
         "dotenv": "^16.4.7",
-        "drizzle-orm": "^0.38.0",
         "lodash": "^4.17.21",
-        "postgres": "^3.4.5"
+        "postgres": "^3.4.5",
+        "python-shell": "^5.0.0"
     }
 }
