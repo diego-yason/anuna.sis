@@ -1,8 +1,10 @@
-import { initializeApp } from 'firebase-admin/app';
+import { applicationDefault, initializeApp } from 'firebase-admin/app';
 import { config } from 'dotenv';
-import { credential } from 'firebase-admin';
+import { getFirestore } from 'firebase-admin/firestore';
 config();
 
-initializeApp({
-	credential: credential.
+const app = initializeApp({
+	credential: applicationDefault(),
+	databaseURL: 'https://anunasis.firebaseio.com'
 });
+export const db = getFirestore(app);
